@@ -1,5 +1,7 @@
 package com.alm;
 
+import java.util.concurrent.TimeoutException;
+
 /**
  * Requirements:
  * <p>
@@ -28,7 +30,7 @@ public interface IEntityLocker<T> {
      * @param entityID with which caller want to work with.
      * @param timeout in milliseconds for lock wait.
      */
-    void lockEntity(T entityID, long timeout);
+    void lockEntity(T entityID, long timeout) throws InterruptedException, TimeoutException;
 
     /**
      * Exit point of the protected code.
