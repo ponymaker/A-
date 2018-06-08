@@ -1,4 +1,4 @@
-package com.alm;
+package com.alm.impl;
 
 import java.util.concurrent.TimeoutException;
 
@@ -18,23 +18,23 @@ import java.util.concurrent.TimeoutException;
 public interface IEntityLocker<T> {
 
     /**
-     * Entry point of the protected code.
+     * Entry point of the protected code. Reentrant.
      *
      * @param entityID with which caller want to work with.
      */
     void lockEntity(T entityID);
 
     /**
-     * Entry point of the protected code with timeout.
+     * Entry point of the protected code.
      *
      * @param entityID with which caller want to work with.
-     * @param timeout in milliseconds for lock wait.
+     * @return true - if success, false - if entity is locked by other thread.
      */
-    void lockEntity(T entityID, long timeout) throws InterruptedException, TimeoutException;
+    boolean tryLockEntity(T entityID);
 
     /**
      * Exit point of the protected code.
      */
-    void unlockEntity();
+    void unlockEntity(T entityID);
 
 }

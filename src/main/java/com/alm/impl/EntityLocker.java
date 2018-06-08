@@ -1,9 +1,7 @@
-package com.alm;
+package com.alm.impl;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class EntityLocker<T> implements IEntityLocker<T> {
@@ -11,19 +9,21 @@ public class EntityLocker<T> implements IEntityLocker<T> {
 
     @Override
     public void lockEntity(T entityID) {
-        getLockByEntityID(entityID).lock();
+        boolean lockSucceed = false;
+        while (!lockSucceed)
+            lockSucceed = getLockByEntityID(entityID).tryLock();
     }
 
     @Override
-    public void lockEntity(T entityID, long timeout) throws InterruptedException, TimeoutException {
-        if (!getLockByEntityID(entityID).tryLock(timeout, TimeUnit.MILLISECONDS)) {
-            throw new TimeoutException();
+    public boolean tryLockEntity(T entityID) {
+        return getLockByEntityID(entityID).tryLock();
+    }
+
+    @Override
+    public void unlockEntity(T entityID) {
+        if (internalLockMap.get(entityID) != null) {
+            internalLockMap.get(entityID).unlock();
         }
-    }
-
-    @Override
-    public void unlockEntity() {
-
     }
 
     private ReentrantLock getLockByEntityID(T entityID) {
