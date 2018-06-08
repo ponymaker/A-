@@ -49,4 +49,8 @@ public interface IEntityLocker<T> {
      */
     void unlockEntity(T entityID);
 
+    void globalLockEntity();
+
+    void globalUnlockEntity();
+
 }
