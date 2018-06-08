@@ -2,6 +2,7 @@ package com.alm.impl;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class EntityLocker<T> implements IEntityLocker<T> {
@@ -18,6 +19,12 @@ public class EntityLocker<T> implements IEntityLocker<T> {
     public boolean tryLockEntity(T entityID) {
         return getLockByEntityID(entityID).tryLock();
     }
+
+    @Override
+    public boolean tryLockEntityWithTimeout(T entityID, long timeout, TimeUnit unit) throws InterruptedException {
+        return getLockByEntityID(entityID).tryLock(timeout, unit);
+    }
+
 
     @Override
     public void unlockEntity(T entityID) {
