@@ -17,7 +17,7 @@ public class EntitySimpleLockerTest {
     @State
     public static class SimpleOneEntityLockTest {
         private SimpleTestObject simpleTestObject = new SimpleTestObject();
-        private final EntityLocker<Integer> simpleTestObjectEntityLocker = new EntityLocker<>();
+        private final EntityLocker<String> simpleTestObjectEntityLocker = new EntityLocker<>();
 
         @Actor
         public void actor1(II_Result result) {
@@ -50,7 +50,7 @@ public class EntitySimpleLockerTest {
     public static class SimpleTwoEntityLockTest {
         private SimpleTestObject simpleTestObject1 = new SimpleTestObject();
         private SimpleTestObject simpleTestObject2 = new SimpleTestObject();
-        private final EntityLocker<Integer> simpleTestObjectEntityLocker = new EntityLocker<>();
+        private final EntityLocker<String> simpleTestObjectEntityLocker = new EntityLocker<>();
 
         @Actor
         public void actor1(II_Result result) {
@@ -83,7 +83,7 @@ public class EntitySimpleLockerTest {
     @State
     public static class SimpleOneEntityReenterTest {
         private SimpleTestObject simpleTestObject1 = new SimpleTestObject();
-        private final EntityLocker<Integer> simpleTestObjectEntityLocker = new EntityLocker<>();
+        private final EntityLocker<String> simpleTestObjectEntityLocker = new EntityLocker<>();
 
         @Actor
         public void actor1(II_Result result) {

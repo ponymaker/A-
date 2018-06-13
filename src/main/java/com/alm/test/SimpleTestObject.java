@@ -1,14 +1,16 @@
 package com.alm.test;
 
+import java.util.UUID;
+
 public class SimpleTestObject {
-    private int id;
+    private String id = UUID.randomUUID().toString();
     private int value;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

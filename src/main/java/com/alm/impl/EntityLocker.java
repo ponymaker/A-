@@ -1,5 +1,7 @@
 package com.alm.impl;
 
+import com.alm.test.LockWrapper;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -7,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class EntityLocker<T> implements IEntityLocker<T> {
-    private final Map<T, ReentrantLock> internalLockMap = new ConcurrentHashMap<>();
+    private final Map<T, LockWrapper> internalLockMap = new ConcurrentHashMap<>();
     private ReentrantReadWriteLock globalLock = new ReentrantReadWriteLock();
 
     @Override
@@ -49,10 +51,10 @@ public class EntityLocker<T> implements IEntityLocker<T> {
     }
 
 
-    private ReentrantLock getLockByEntityID(T entityID) {
+    private LockWrapper getLockByEntityID(T entityID) {
         if (entityID == null)
             throw new IllegalArgumentException("EntityID can't be null.");
-        internalLockMap.putIfAbsent(entityID, new ReentrantLock(true));
+        internalLockMap.putIfAbsent(entityID, new LockWrapper(true));
         return internalLockMap.get(entityID);
     }
 

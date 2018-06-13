@@ -18,7 +18,7 @@ public class EntityTimeoutLockerTest {
     @State
     public static class SimpleOneEntityTimeoutSuccessWaitTest {
         private SimpleTestObject simpleTestObject = new SimpleTestObject();
-        private final EntityLocker<Integer> simpleTestObjectEntityLocker = new EntityLocker<>();
+        private final EntityLocker<String> simpleTestObjectEntityLocker = new EntityLocker<>();
 
         @Actor
         public void actor1(II_Result result) {
@@ -59,7 +59,7 @@ public class EntityTimeoutLockerTest {
     @State
     public static class SimpleOneEntityTimeoutUnsuccessWaitTest {
         private SimpleTestObject simpleTestObject = new SimpleTestObject();
-        private final EntityLocker<Integer> simpleTestObjectEntityLocker = new EntityLocker<>();
+        private final EntityLocker<String> simpleTestObjectEntityLocker = new EntityLocker<>();
 
         @Actor
         public void actor1(II_Result result) {
