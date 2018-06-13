@@ -1,11 +1,8 @@
 package com.alm.impl;
 
-import com.alm.test.LockWrapper;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class EntityLocker<T> implements IEntityLocker<T> {
